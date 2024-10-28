@@ -1,4 +1,4 @@
-# unit-3-assignment-1
+# unit-3-assignment-3
 
 ## API and Documentation
 Documentation for the shape classes can be found [here](https://coderunner.projectstem.org/docs/shapes/index.html).
@@ -25,46 +25,96 @@ After you compile the shape classes, you only need to compile and run `Main.java
 
 # Instructions  
 
-For any of these questions, you are NOT writing if-statements.  You should only be making boolean variables, and creating boolean expressions using the relational and logical operators.  Find the documentation for the Circle, Rectangle, and RegularPolygon class at this link.
+## Problem 1
+Write a program that takes in two integers as input, and displays `"Ratio OK"` if the ratio (or quotient) of the first input by the second input is between 1 exclusive and 8 inclusive.  If the user accidentally divides by 0, then display an error message instead.
 
-[Shapes API](https://coderunner.projectstem.org/docs/shapes/index.html?_ga=2.85318812.489019979.1697552509-1811407564.1697552446)
+## Problem 2
+Write a program that takes in two integers, `a`, and `b`, as input and displays `"Is a factor"` if `b` is a factor of `a` (or in other words, if a is divisible by b).  If b is 0, then display an error message instead.
 
-## Problem
-Create two `Rectangle` objects (you can either hardcode or get user input).  Create boolean variables that meet the following criteria
+## Problem 3
+Write a program that takes in an integer as input, and checks whether it is outside of the range 50-59 (inclusive). If it is outside of this range the program should print a warning and change the number to 55. 
 
- - `isRotated`: Evaluates to `true` if the rectangles are 90 degrees rotated from each other, and is `false` otherwise.  This means the length of one is equal to the width of the other, and vice versa.
- - `isCongruent`: Evaluates to `true` if the rectangles are equal to each other, or are rotated 90 degrees to each other.  Use both the `equals()` method from the `Rectangle` class as well as `isRotated` that you created earlier.
- - `isSimilar`: Evaluates to `true` if either the rectangles are congruent, or if the ratio of the lengths of the rectangles are equal to the ratio of the widths.
+Sample runs of the program functioning properly are below:
 
-Print out all your booleans.
+Sample run 1:
+```
+Enter a number in the fifties
+51
+Your number is 51
+```
+Sample run 2:
+```
+Enter a number in the fifties
+33
+That's not in the fifties!
+Your number is 55
+```
 
-## CodingBat
-Do the following on [CodingBat - Logic 1](https://codingbat.com/java/Logic-1)
+## Problem 4
+Write a program that takes two inputs, x and y, from the user and print "pass" if one or more of the following is true:
 
-No if-statements are needed (don't worry if this causes your solution to be slightly inefficient).
- - cigarParty
- - squirrelPlay
- - love6
- - in1To10
-
+- y is not greater than 9
+- x is not less than or equal 2 and `x * y` is greater than 10
 ## Sample Solutions
 ```java
 public class Main
 {
 	public static void main(String[] args)
 	{
-		Rectangle r1 = new Rectangle(2, 4);
-		Rectangle r2 = new Rectangle(4, 2);
+		Scanner sc = new Scanner(System.in);
+		// Problem 1
+		System.out.println("Enter two numbers:");
+		int x = sc.nextInt();
+		int y = sc.nextInt();
 
-		// Rotated if the length of 1 is equal to the width of 2 and vice versa
-		boolean isRotated = (r1.getLength() == r2.getWidth()) && (r1.getWidth() == r2.getLength());
+		if (y == 0)
+		{
+			System.out.println("Arithmetic exception");
+		}
+		else
+		{
+			double ratio = (double) x / y;
+			if (1 < ratio && ratio <= 8)
+			{
+				System.out.println("Ratio OK");
+			}
+		}
 
-		// Congruent if they are either rotated, or exactly equal to each other; equals() from the Rectangle class will check
-		// equality of rectangles for me
-		boolean isCongruent = isRotated || r1.equals(r2);
+		// Problem 2
+		System.out.println("Enter two numbers:");
+		int a = sc.nextInt();
+		int b = sc.nextInt();
 
-		// Similar if they are either congruent, or if the ratio of the lengths is equal to the ratio of the widths
-		boolean isSimilar = isCongruent || ( (r1.getLength() / r2.getLength()) == (r1.getWidth() / r2.getWidth()) ) ;
+		if (b == 0)
+		{
+			System.out.println("Divide by 0 error");
+		}
+		else if (a % b == 0)
+		{
+			System.out.println("Is a factor");
+		}
+
+		// Problem 3
+		System.out.println("enter a number in the fifties");
+		int num = sc.nextInt();
+
+		if (num < 50 || num > 59)
+		{
+			num = 55;
+			System.out.println("That's not in the fifties");
+		}
+
+		System.out.println("Your number is " + num);
+
+		// Problem
+		System.out.println("Give two numbers");
+		x = sc.nextInt();
+		y = sc.nextInt();
+
+		if (y <= 9 || x > 2 && x * y > 10)
+		{
+			System.out.println("pass");
+		}
 	}
 }
 ```
